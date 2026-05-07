@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'realestateassetmanager.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'realestateassetmanager',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
