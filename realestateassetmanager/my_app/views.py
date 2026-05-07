@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from .models import Building, Floor
@@ -52,5 +53,13 @@ class FloorDelete(LoginRequiredMixin, DeleteView):
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('building-list')
     template_name = 'registration/signup.html'
+
+    def form_valid(self, form):
+        # 1. Save the user to the database
+        user = form.save()
+        # 2. Log the user in manually
+        login(self.request, user)
+        # 3. Redirect to the success_url (portfolio)
+        return super().form_valid(form)
