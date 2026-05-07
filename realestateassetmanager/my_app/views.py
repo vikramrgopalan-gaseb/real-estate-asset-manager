@@ -1,3 +1,4 @@
+from django.views import generic
 from django.shortcuts import render
 
 # Create your views here.
@@ -5,6 +6,7 @@ from django.shortcuts import render
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from .models import Building, Floor
 
@@ -12,8 +14,17 @@ from .models import Building, Floor
 class BuildingList(LoginRequiredMixin, ListView):
     model = Building
 
+    def get_queryset(self):
+        # Only return buildings owned by the current user
+        return Building.objects.filter(owner=self.request.user)
+
 class BuildingDetail(LoginRequiredMixin, DetailView):
     model = Building
+
+    def get_queryset(self):
+        # Ensures that if a user tries to access a building ID they don't own, 
+        # Django will throw a 404 "Not Found" error
+        return Building.objects.filter(owner=self.request.user)
 
 class BuildingCreate(LoginRequiredMixin, CreateView):
     model = Building
@@ -38,3 +49,8 @@ class FloorUpdate(LoginRequiredMixin, UpdateView):
 class FloorDelete(LoginRequiredMixin, DeleteView):
     model = Floor
     success_url = reverse_lazy('building-list')
+
+class SignUpView(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'

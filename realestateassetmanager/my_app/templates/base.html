@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real Estate Asset Manager</title>
+</head>
+<body>
+    <nav>
+        <strong>Asset Manager</strong> | 
+        <a href="{% url 'building-list' %}">Portfolio</a> |
+        {% if user.is_authenticated %}
+            <span>Welcome, {{ user.username }}</span> |
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit">Logout</button>
+            </form>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a> |
+            <a href="{% url 'signup' %}">Sign Up</a>
+        {% endif %}
+    </nav>
+    <hr>
+
+    <main>
+        {% block content %}
+        <!-- Child templates will inject their content here -->
+        {% endblock %}
+    </main>
+</body>
+</html>

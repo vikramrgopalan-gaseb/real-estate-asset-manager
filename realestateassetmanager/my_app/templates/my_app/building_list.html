@@ -1,3 +1,6 @@
+{% extends 'base.html' %}
+
+{% block content %}
 <h1>My Portfolio</h1>
 <a href="{% url 'building-create' %}">+ Add Building</a>
 <ul>
@@ -8,3 +11,5 @@
     {% endfor %}
 </ul>
 <a href="{% url 'floor-create' %}">+ Add a Floor to a Building</a>
+{% endblock %}
+

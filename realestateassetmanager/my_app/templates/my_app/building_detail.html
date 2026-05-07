@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ building.name }}</h1>
+<p><strong>Address:</strong> {{ building.address }}</p>
+
+<h3>Floor Mix & Income</h3>
+<table border="1" cellpadding="10">
+    <thead>
+        <tr>
+            <th>Floor #</th>
+            <th>Type</th>
+            <th>Annual Income</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for floor in building.floors.all %}
+        <tr>
+            <td>{{ floor.floor_number }}</td>
+            <td>{{ floor.get_floor_type_display }}</td>
+            <td>${{ floor.annual_income }}</td>
+            <td>
+                <a href="{% url 'floor-update' floor.id %}">Edit</a> | 
+                <a href="{% url 'floor-delete' floor.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No floors added yet.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<br>
+<a href="{% url 'floor-create' %}">+ Add New Floor</a> | 
+<a href="{% url 'building-list' %}">Back to Portfolio</a>
+{% endblock %}

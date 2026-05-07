@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Delete Floor?</h1>
+<p>Are you sure you want to delete floor #{{ object.floor_number }} from <strong>{{ object.building.name }}</strong>?</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" style="color: red;">Yes, Delete it</button>
+    <a href="{% url 'building-list' %}">Cancel</a>
+</form>
+{% endblock %}
