@@ -1,15 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>My Portfolio</h1>
-<a href="{% url 'building-create' %}">+ Add Building</a>
-<ul>
-    {% for building in object_list %}
-        <li>
-            <a href="{% url 'building-detail' building.id %}">{{ building.name }}</a>
-        </li>
-    {% endfor %}
-</ul>
-<a href="{% url 'floor-create' %}">+ Add a Floor to a Building</a>
-{% endblock %}
+<div class="main-container">
+    <div class="portfolio-header">
+        <h1>My Portfolio</h1>
+        <a href="{% url 'building-create' %}" class="btn-primary">+ Add Building</a>
+    </div>
 
+    <div class="building-grid">
+        {% for building in object_list %}
+            <div class="building-card">
+                <div class="card-body">
+                    <h3>{{ building.name }}</h3>
+                    <p class="address">{{ building.address }}</p>
+                    <div class="card-footer">
+                        <a href="{% url 'building-detail' building.id %}" class="btn-view">View Manager</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p class="empty-state">No buildings in your portfolio yet. <a href="{% url 'building-create' %}">Add your first one!</a></p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
