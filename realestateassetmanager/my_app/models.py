@@ -19,7 +19,7 @@ class Floor(models.Model):
     ]
     building = models.ForeignKey(Building, related_name='floors', on_delete=models.CASCADE)
     floor_number = models.IntegerField()
-    floor_type = models.CharField(max_length=10, choices=FLOOR_TYPES)
+    floor_type = models.CharField(max_length=10, choices=FLOOR_TYPES, default='RETAIL')
     annual_income = models.DecimalField(max_digits=12, decimal_places=2)
 
     def __str__(self):
