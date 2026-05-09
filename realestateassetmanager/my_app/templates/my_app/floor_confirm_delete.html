@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Delete Floor?</h1>
-<p>Are you sure you want to delete floor #{{ object.floor_number }} from <strong>{{ object.building.name }}</strong>?</p>
+<div class="auth-container">
+    <div class="auth-card">
+        <h2 class="text-danger">Delete Floor?</h2>
+        
+        <p>Are you sure you want to delete <strong>Floor #{{ object.floor_number }}</strong> from <strong>{{ object.building.name }}</strong>?</p>
+        <p class="text-muted small">This action cannot be undone.</p>
 
-<form method="post">
-    {% csrf_token %}
-    <button type="submit" style="color: red;">Yes, Delete it</button>
-    <a href="{% url 'building-list' %}">Cancel</a>
-</form>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-actions">
+                <button type="submit" class="btn-delete">Yes, Delete Floor</button>
+                <!-- Redirect back to the building detail page -->
+                <a href="{% url 'building-detail' object.building.id %}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

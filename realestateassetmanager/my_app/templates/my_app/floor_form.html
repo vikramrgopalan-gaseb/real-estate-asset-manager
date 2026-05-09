@@ -1,14 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Manage Floor</h1>
-
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Floor Details</button>
-</form>
-
-<br>
-<a href="{% url 'building-list' %}">Cancel</a>
+<div class="auth-container">
+    <div class="auth-card">
+        <h2>Add Floor to Asset</h2>
+        
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            
+            <div class="form-actions">
+                <button type="submit" class="btn-primary">Save Floor</button>
+                {% if object.id %}
+                <a href="{% url 'building-detail' object.building.id %}" class="btn-cancel">Cancel</a>
+                {% else %}
+                <a href="{% url 'building-detail' view.kwargs.building_pk %}" class="btn-cancel">Cancel</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

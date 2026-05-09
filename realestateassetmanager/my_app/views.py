@@ -39,17 +39,35 @@ class BuildingCreate(LoginRequiredMixin, CreateView):
 # FLOOR VIEWS
 class FloorCreate(LoginRequiredMixin, CreateView):
     model = Floor
-    fields = ['building', 'floor_number', 'floor_type', 'annual_income']
+    fields = ['floor_number', 'floor_type', 'annual_income']
     success_url = reverse_lazy('building-list')
+
+    def form_valid(self, form):
+        # Capture the building ID from the URL (e.g., /building/5/floor/add/)
+        building_id = self.kwargs.get('building_pk')
+        form.instance.building = Building.objects.get(pk=building_id)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        # Redirect back to the specific building we just added a floor to
+        return reverse_lazy('building-detail', kwargs={'pk': self.kwargs['building_pk']})
 
 class FloorUpdate(LoginRequiredMixin, UpdateView):
     model = Floor
     fields = ['floor_type', 'annual_income']
-    success_url = reverse_lazy('building-list')
+    template_name = 'my_app/floor_form.html'
+
+    def get_success_url(self):
+        # self.object refers to the specific Floor being updated
+        # We grab its parent building's ID to build the redirect URL
+        return reverse_lazy('building-detail', kwargs={'pk': self.object.building.id})
 
 class FloorDelete(LoginRequiredMixin, DeleteView):
     model = Floor
-    success_url = reverse_lazy('building-list')
+
+    def get_success_url(self):
+        # Redirect back to the building detail page
+        return reverse_lazy('building-detail', kwargs={'pk': self.object.building.id})
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm

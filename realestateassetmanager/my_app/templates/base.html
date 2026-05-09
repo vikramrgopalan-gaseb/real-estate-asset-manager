@@ -1,31 +1,46 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Real Estate Asset Manager</title>
+    <!-- Link to your CSS file -->
     <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-    <nav>
-        <strong>Asset Manager</strong> | 
-        <a href="{% url 'building-list' %}">Portfolio</a> |
-        {% if user.is_authenticated %}
-            <span>Welcome, {{ user.username }}</span> |
-            <form action="{% url 'logout' %}" method="post" style="display:inline;">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
-        {% else %}
-            <a href="{% url 'login' %}">Login</a> |
-            <a href="{% url 'signup' %}">Sign Up</a>
-        {% endif %}
-    </nav>
-    <hr>
 
-    <main>
+    <!-- Main Navigation Bar -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <a href="{% url 'building-list' %}">Real Estate Asset Manager</a>
+            </div>
+            
+            <div class="nav-links">
+                <a href="{% url 'building-list' %}" class="nav-item">Portfolio</a>
+                
+                {% if user.is_authenticated %}
+                    <span class="user-greeting">Welcome, <strong>{{ user.username }}</strong></span>
+                    <form action="{% url 'logout' %}" method="post" class="logout-form">
+                        {% csrf_token %}
+                        <button type="submit" class="btn-logout">Logout</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="nav-item">Login</a>
+                    <a href="{% url 'signup' %}" class="nav-item">Sign Up</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <!-- This class 'page-wrapper' handles the centering for all pages -->
+    <main class="page-wrapper">
         {% block content %}
-        <!-- Child templates will inject their content here -->
         {% endblock %}
     </main>
+
 </body>
 </html>
+
