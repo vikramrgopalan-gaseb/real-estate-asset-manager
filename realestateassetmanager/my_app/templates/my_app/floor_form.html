@@ -1,23 +1,16 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="auth-container">
-    <div class="auth-card">
-        <h2>Add Floor to Asset</h2>
-        
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            
-            <div class="form-actions">
-                <button type="submit" class="btn-primary">Save Floor</button>
-                {% if object.id %}
-                <a href="{% url 'building-detail' object.building.id %}" class="btn-cancel">Cancel</a>
-                {% else %}
-                <a href="{% url 'building-detail' view.kwargs.building_pk %}" class="btn-cancel">Cancel</a>
-                {% endif %}
-            </div>
-        </form>
-    </div>
+<div class="auth-card">
+    <h2>Manage Floor</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="actions">
+            <button type="submit" class="btn-primary">Save Details</button>
+            <a href="{% url 'building-list' %}">Cancel</a>
+        </div>
+    </form>
 </div>
 {% endblock %}
+
