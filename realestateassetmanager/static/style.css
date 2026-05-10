@@ -30,13 +30,19 @@ body {
     padding: 0 20px;
 }
 
+/* This targets the brand/logo and the portfolio link */
 .nav-brand a, 
-.nav-brand a:link, 
 .nav-brand a:visited, 
+.nav-item, 
+.nav-item:visited {
+    color: #ffffff !important; /* Forces white */
+    text-decoration: none !important; /* Removes underlines */
+}
+
+/* Optional: Add a hover color so users know it's clickable */
 .nav-brand a:hover, 
-.nav-brand a:active {
-    color: #ffffff !important;
-    text-decoration: none !important;
+.nav-item:hover {
+    color: #3498db !important; /* Turns light blue on hover */
 }
 
 .nav-links {
