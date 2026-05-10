@@ -12,7 +12,6 @@
             {% csrf_token %}
             <div class="form-actions">
                 <button type="submit" class="btn-delete">Yes, Delete Floor</button>
-                <!-- Redirect back to the building detail page -->
                 <a href="{% url 'building-detail' object.building.id %}" class="btn-cancel">Cancel</a>
             </div>
         </form>
