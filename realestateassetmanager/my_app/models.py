@@ -8,6 +8,7 @@ class Building(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=255)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    svg_filename = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.name
