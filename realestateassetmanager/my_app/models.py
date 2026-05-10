@@ -11,10 +11,10 @@ class Building(models.Model):
         return self.name
 
 class Floor(models.Model):
-    TYPES = [('RETAIL', 'Retail'), ('OFFICE', 'Office')]
+    TYPES = [('OPEN', 'Open'), ('OFFICE', 'Office')]
     building = models.ForeignKey(Building, related_name='floors', on_delete=models.CASCADE)
     floor_number = models.IntegerField()
-    floor_type = models.CharField(max_length=10, choices=TYPES, default='RETAIL')
+    floor_type = models.CharField(max_length=10, choices=TYPES, default='OPEN')
     annual_income = models.DecimalField(max_digits=12, decimal_places=2)
 
     def __str__(self):

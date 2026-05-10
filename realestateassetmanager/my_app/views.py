@@ -36,7 +36,7 @@ class BuildingDetail(LoginRequiredMixin, DetailView):
 
 class BuildingCreate(LoginRequiredMixin, CreateView):
     model = Building
-    fields = ['name', 'address', 'svg_filename']
+    fields = ['name', 'address']
     success_url = reverse_lazy('building-list')
     def form_valid(self, form):
         form.instance.owner = self.request.user
