@@ -42,6 +42,15 @@ class BuildingCreate(LoginRequiredMixin, CreateView):
         form.instance.owner = self.request.user
         return super().form_valid(form)
 
+class BuildingUpdate(LoginRequiredMixin, UpdateView):
+    model = Building
+    fields = ['name', 'address']
+    success_url = reverse_lazy('building-list')
+
+class BuildingDelete(LoginRequiredMixin, DeleteView):
+    model = Building
+    success_url = reverse_lazy('building-list')
+
 # FLOOR CRUD
 class FloorCreate(LoginRequiredMixin, CreateView):
     model = Floor

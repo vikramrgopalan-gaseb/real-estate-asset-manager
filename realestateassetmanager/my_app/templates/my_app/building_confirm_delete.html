@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="auth-card">
+    <h2 class="text-danger">Delete Building?</h2>
+    <p>Are you sure you want to permanently delete <strong>{{ object.name }}</strong>?</p>
+    <p class="text-muted small">This will also remove all floors associated with this building.</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-actions">
+            <button type="submit" class="btn-delete">Confirm Delete</button>
+            <a href="{% url 'building-list' %}" class="btn-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

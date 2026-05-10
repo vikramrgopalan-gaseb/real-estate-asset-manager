@@ -128,6 +128,36 @@ body {
     color: white;
 }
 
+.btn-delete-icon {
+    display: block;
+    padding: 8px;
+    color: #e74c3c; /* Warning Red */
+    text-decoration: none;
+    font-size: 0.85rem;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.btn-delete-icon:hover {
+    border-color: #e74c3c;
+    background-color: #fdf2f2;
+}
+
+.btn-edit-text {
+    text-align: center;
+    text-decoration: none;
+    color: #3498db;        /* Blue */
+    font-size: 0.85rem;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.3s;
+}
+
+.btn-edit-text:hover {
+    background-color: #ebf5fb; /* Light blue highlight */
+}
+
 /* --- FORM CARDS (Login/Signup/Add) --- */
 .auth-card {
     background: white;
