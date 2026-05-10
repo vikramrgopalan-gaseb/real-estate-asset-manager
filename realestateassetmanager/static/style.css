@@ -31,18 +31,15 @@ body {
 }
 
 /* This targets the brand/logo and the portfolio link */
-.nav-brand a, 
-.nav-brand a:visited, 
-.nav-item, 
-.nav-item:visited {
-    color: #ffffff !important; /* Forces white */
-    text-decoration: none !important; /* Removes underlines */
+.nav-brand, 
+.nav-brand:visited {
+    color: #ffffff; /* Forces white */
+    text-decoration: none; /* Removes underlines */
 }
 
 /* Optional: Add a hover color so users know it's clickable */
-.nav-brand a:hover, 
-.nav-item:hover {
-    color: #3498db !important; /* Turns light blue on hover */
+.nav-brand:hover {
+    color: #3498db; /* Turns light blue on hover */
 }
 
 .nav-links {

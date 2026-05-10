@@ -10,7 +10,8 @@
 <div class="grid">
     {% for building in object_list %}
     <div class="card">
-        <img src="{% static 'svg/'|add:building.svg_filename %}" alt="Building Icon">
+        <- make this just 1 svg image for all buildings ->
+        <img src="{% static 'building.svg/'%}" alt="Building Icon">
         <div class="card-body">
             <h3>{{ building.name }}</h3>
             <p>{{ building.address }}</p>
