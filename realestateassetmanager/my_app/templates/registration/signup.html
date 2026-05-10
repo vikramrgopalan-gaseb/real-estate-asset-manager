@@ -4,6 +4,7 @@
 <div class="auth-container">
     <div class="auth-card">
         <h2>Sign Up</h2>
+         <p class="text-danger">{{ error_message }}</p>
         <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
