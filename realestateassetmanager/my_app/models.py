@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 class Building(models.Model):
     name = models.CharField(max_length=100)
@@ -9,6 +10,9 @@ class Building(models.Model):
 
     def __str__(self):
         return self.name
+
+   # def get_absolute_url(self):
+    #    return reverse('building-list')
 
 class Floor(models.Model):
     TYPES = [('OPEN', 'Open'), ('OFFICE', 'Office')]
@@ -20,3 +24,5 @@ class Floor(models.Model):
     def __str__(self):
         return f"Floor {self.floor_number} - {self.building.name}"
 
+    def get_absolute_url(self):
+        return reverse('building-detail', kwargs={'pk': self.building.id})
