@@ -11,8 +11,6 @@ class Building(models.Model):
     def __str__(self):
         return self.name
 
-   # def get_absolute_url(self):
-    #    return reverse('building-list')
 
 class Floor(models.Model):
     TYPES = [('OPEN', 'Open'), ('OFFICE', 'Office')]

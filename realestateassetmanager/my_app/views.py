@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-#from django.urls import reverse
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .models import Building, Floor
@@ -46,7 +46,7 @@ class BuildingCreate(LoginRequiredMixin, CreateView):
 class BuildingUpdate(LoginRequiredMixin, UpdateView):
     model = Building
     fields = ['name', 'address']
-    
+    success_url = '/'
 
 class BuildingDelete(LoginRequiredMixin, DeleteView):
     model = Building
@@ -59,16 +59,15 @@ class FloorCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.building = Building.objects.get(pk=self.kwargs['building_pk'])
         return super().form_valid(form)
-   # def get_success_url(self):
-        #return reverse('building-detail', kwargs={'pk': self.kwargs['building_pk']})
+   
 
 class FloorUpdate(LoginRequiredMixin, UpdateView):
     model = Floor
     fields = ['floor_type', 'annual_income']
-    #def get_success_url(self):
-        # return reverse('building-detail', kwargs={'pk': self.object.building.id})
+    
 
 class FloorDelete(LoginRequiredMixin, DeleteView):
     model = Floor
-    #def get_success_url(self):
-        # return reverse('building-detail', kwargs={'pk': self.object.building.id})
+    def get_success_url(self):
+        return reverse('building-detail', kwargs={'pk': self.object.building.id})
+    
